@@ -1,4 +1,3 @@
-# Commençons par importer les bibliothèques nécessaires
 import pandas as pd
 
 # Chemins des fichiers
