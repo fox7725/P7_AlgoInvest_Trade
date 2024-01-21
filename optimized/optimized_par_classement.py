@@ -1,4 +1,5 @@
 import csv
+import time
 
 
 # Chemins des fichiers
@@ -48,29 +49,58 @@ def construire_new_dataset(data, budget_max_centimes):
     return retour
 
 
-print("Pour le fichier 1 :")
-fichier1_traite = lecture_fichier(fichier1)
-print(fichier1_traite)
-print("max500 :")
-print(construire_new_dataset(fichier1_traite, budget_max_centimes)[0])
-print(f"totaux : achat {construire_new_dataset(fichier1_traite, budget_max_centimes)[1]/100} - profit "
-        f"{round(construire_new_dataset(fichier1_traite, budget_max_centimes)[2]/100, 2)}")
+print("Valeurs sélectionnées pour le fichier 1 :")
+start_time = time.time()
+fichier1_lu = lecture_fichier(fichier1)
+fichier1_traite = construire_new_dataset(fichier1_lu, budget_max_centimes)
+liste_actions = fichier1_traite[0]
+cout_max = fichier1_traite[1]
+profit_max = fichier1_traite[2]
+for action in liste_actions:
+    print(f"Nom: {action['name']}, Coût: {action['price'] / 100}€, Valeur après 2 ans: "
+          f"{round(action['profit'] / 100, 2)}€")
+print(f"totaux : achat {cout_max/100} - profit "
+        f"{round(profit_max/100, 2)}")
+end_time = time.time()
+print(f"Le fichier initial contenait {len(fichier1_lu)} actions, nous avons sélectionné {len(liste_actions)} "
+      f"actions dans le fichier")
+print(f"Temps mis pour traiter le premier fichier : {end_time - start_time} secondes")
 input("Tapez ENTER !")
+
 print(" ")
-print("Pour le fichier 2 :")
-fichier2_traite = lecture_fichier(fichier2)
-print(fichier2_traite)
-print("max500 :")
-print(construire_new_dataset(fichier2_traite, budget_max_centimes))
-print(f"totaux : achat {construire_new_dataset(fichier2_traite, budget_max_centimes)[1]/100} - profit "
-       f"{round(construire_new_dataset(fichier2_traite, budget_max_centimes)[2]/100, 2)}")
+print("Valeurs sélectionnées pour le fichier 2 :")
+start_time = time.time()
+fichier2_lu = lecture_fichier(fichier2)
+fichier2_traite = construire_new_dataset(fichier2_lu, budget_max_centimes)
+liste_actions = fichier2_traite[0]
+cout_max = fichier2_traite[1]
+profit_max = fichier2_traite[2]
+for action in liste_actions:
+    print(f"Nom: {action['name']}, Coût: {action['price'] / 100}€, Valeur après 2 ans: "
+          f"{round(action['profit'] / 100, 2)}€")
+print(f"totaux : achat {cout_max/100} - profit "
+        f"{round(profit_max/100, 2)}")
+end_time = time.time()
+print(f"Le fichier initial contenait {len(fichier2_lu)} actions, nous avons sélectionné {len(liste_actions)} "
+      f"actions dans le fichier")
+print(f"Temps mis pour traiter le second fichier : {end_time - start_time} secondes")
 input("Tapez ENTER !")
+
 print(" ")
-print("pour les deux fichiers :")
+print("Valeurs sélectionnées sur l'ensemble des deux fichiers :")
+start_time = time.time()
 fichiers_ensembles = lecture_fichier(fichier1) + lecture_fichier(fichier2)
 fichiers_ensembles.sort(key=lambda x: x['profit'], reverse=True)
-print(fichiers_ensembles)
-print("max500 :")
-print(construire_new_dataset(fichiers_ensembles, budget_max_centimes))
-print(f"totaux : achat {construire_new_dataset(fichiers_ensembles, budget_max_centimes)[1]/100} - profit "
-       f"{round(construire_new_dataset(fichiers_ensembles, budget_max_centimes)[2]/100, 2)}")
+fichiers_ensembles_traites = construire_new_dataset(fichiers_ensembles, budget_max_centimes)
+liste_actions = fichiers_ensembles_traites[0]
+cout_max = fichiers_ensembles_traites[1]
+profit_max = fichiers_ensembles_traites[2]
+for action in liste_actions:
+    print(f"Nom: {action['name']}, Coût: {action['price'] / 100}€, Valeur après 2 ans: "
+          f"{round(action['profit'] / 100, 2)}€")
+print(f"totaux : achat {cout_max/100} - profit "
+        f"{round(profit_max/100, 2)}")
+end_time = time.time()
+print(f"Les deux fichiers ensemble contenaient {len(fichiers_ensembles)} actions, nous avons sélectionné"
+      f" {len(liste_actions)} actions dans cet ensemble")
+print(f"Temps mis pour traiter les deux fichiers : {end_time - start_time} secondes")

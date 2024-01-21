@@ -1,5 +1,6 @@
 import csv
 from itertools import combinations
+import time
 
 
 def lire_actions_csv(filename):
@@ -43,8 +44,12 @@ def brute_force(actions, budget_max):
     return meilleure_combinaison
 
 
+start_time = time.time()
 # Exemple d'utilisation
 actions = lire_actions_csv('Actions.csv')
 budget_max = 500
 meilleur_ensemble = brute_force(actions, budget_max)
 print("Meilleur ensemble d'actions à acheter:", [action[0] for action in meilleur_ensemble])
+end_time = time.time()
+print(f"Le temps de traitement de la Brute Force a été de :"
+      f" {end_time - start_time} secondes")

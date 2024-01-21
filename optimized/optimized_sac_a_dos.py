@@ -1,4 +1,5 @@
 import pandas as pd
+import time
 
 # Chemins des fichiers
 fichier1 = 'dataset1_Python+P7.csv'
@@ -8,7 +9,7 @@ fichier2 = 'dataset2_Python+P7.csv'
 budget_max = 500
 budget_max_centimes = budget_max * 100
 
-
+start_time = time.time()
 # Lecture et nettoyage des données des fichiers CSV
 def lire_et_nettoyer_csv(fichier):
     data = pd.read_csv(fichier)
@@ -68,3 +69,6 @@ for action in meilleur_ensemble:
 print(" ")
 print(f"Total d'achat: {total_cost/100}€, Valeur totale après 2 ans: {total_value_after_2_years/100}€")
 print("Nombre d'actions sélectionnées : " + str(len(meilleur_ensemble)))
+end_time = time.time()
+print(f"Le temps de traitement avec la méthode du sac à dos est de "
+      f"{end_time - start_time} secondes")
