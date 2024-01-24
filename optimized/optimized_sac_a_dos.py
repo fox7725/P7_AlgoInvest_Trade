@@ -1,15 +1,7 @@
 import pandas as pd
 import time
 
-# Chemins des fichiers
-fichier1 = 'dataset1_Python+P7.csv'
-fichier2 = 'dataset2_Python+P7.csv'
 
-# Définir le budget maximum en centimes
-budget_max = 500
-budget_max_centimes = budget_max * 100
-
-start_time = time.time()
 # Lecture et nettoyage des données des fichiers CSV
 def lire_et_nettoyer_csv(fichier):
     data = pd.read_csv(fichier)
@@ -19,14 +11,6 @@ def lire_et_nettoyer_csv(fichier):
     data['price'] = (data['price'] * 100).astype(int)
     data['profit'] = data['price'] * data['profit'] / 100
     return data
-
-
-# Lire et nettoyer les données des deux fichiers
-actions1 = lire_et_nettoyer_csv(fichier1)
-actions2 = lire_et_nettoyer_csv(fichier2)
-
-# Combiner les données des deux fichiers
-actions_combinees = pd.concat([actions1, actions2], ignore_index=True)
 
 
 # Fonction pour trouver le meilleur ensemble d'actions à acheter
@@ -53,22 +37,39 @@ def meilleur_investissement_sac_a_dos(actions, budget):
 
     return solution
 
+def resultat():
+    # Chemins des fichiers
+    fichier1 = 'optimized/dataset1_Python+P7.csv'
+    fichier2 = 'optimized/dataset2_Python+P7.csv'
 
-# Trouver le meilleur ensemble d'actions
-meilleur_ensemble = meilleur_investissement_sac_a_dos(actions_combinees, budget_max_centimes)
+    # Définir le budget maximum en centimes
+    budget_max = 500
+    budget_max_centimes = budget_max * 100
 
-# Calculer et afficher les totaux
-total_cost = sum(action['cost'] for action in meilleur_ensemble)
-total_value_after_2_years = sum(action['value_after_2_years'] for action in meilleur_ensemble)
+    start_time = time.time()
 
-# Affichage des résultats
-print("Actions sélectionnées :")
-for action in meilleur_ensemble:
-    print(f"Nom: {action['name']}, Coût: {action['cost']/100}€, Valeur après 2 ans: {action['value_after_2_years']/100}€")
+    # Lire et nettoyer les données des deux fichiers
+    actions1 = lire_et_nettoyer_csv(fichier1)
+    actions2 = lire_et_nettoyer_csv(fichier2)
 
-print(" ")
-print(f"Total d'achat: {total_cost/100}€, Valeur totale après 2 ans: {total_value_after_2_years/100}€")
-print("Nombre d'actions sélectionnées : " + str(len(meilleur_ensemble)))
-end_time = time.time()
-print(f"Le temps de traitement avec la méthode du sac à dos est de "
-      f"{end_time - start_time} secondes")
+    # Combiner les données des deux fichiers
+    actions_combinees = pd.concat([actions1, actions2], ignore_index=True)
+
+    # Trouver le meilleur ensemble d'actions
+    meilleur_ensemble = meilleur_investissement_sac_a_dos(actions_combinees, budget_max_centimes)
+
+    # Calculer et afficher les totaux
+    total_cost = sum(action['cost'] for action in meilleur_ensemble)
+    total_value_after_2_years = sum(action['value_after_2_years'] for action in meilleur_ensemble)
+
+    # Affichage des résultats
+    print("Actions sélectionnées :")
+    for action in meilleur_ensemble:
+        print(f"Nom: {action['name']}, Coût: {action['cost']/100}€, Valeur après 2 ans: {action['value_after_2_years']/100}€")
+
+    print(" ")
+    print(f"Total d'achat: {total_cost/100}€, Valeur totale après 2 ans: {total_value_after_2_years/100}€")
+    print("Nombre d'actions sélectionnées : " + str(len(meilleur_ensemble)))
+    end_time = time.time()
+    duree = end_time - start_time
+    return duree

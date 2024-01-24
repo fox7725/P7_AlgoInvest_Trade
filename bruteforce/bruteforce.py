@@ -44,21 +44,21 @@ def brute_force(actions, budget_max):
     return meilleure_combinaison
 
 
-start_time = time.time()
-# Exemple d'utilisation
-actions = lire_actions_csv('Actions.csv')
-budget_max = 500
-meilleur_ensemble = brute_force(actions, budget_max)
-print("Meilleur ensemble d'actions à acheter :")
-cout_total = 0
-profit_total = 0
-for action in meilleur_ensemble:
-    print(f"Nom : {action[0]} - coût : {action[1]} - profit : {action[2]}")
-    cout_total += action[1]
-    profit_total += action[2]
-print(f"Pour un total de {len(meilleur_ensemble)} actions, nous avons un coût "
-      f"total "
-      f"de {cout_total} € et un profit total de {round(profit_total, 2)} €")
-end_time = time.time()
-print(f"Le temps de traitement de la Brute Force a été de :"
-      f" {end_time - start_time} secondes")
+def resultat():
+    start_time = time.time()
+    actions = lire_actions_csv('bruteforce/Actions.csv')
+    budget_max = 500
+    meilleur_ensemble = brute_force(actions, budget_max)
+    print("Meilleur ensemble d'actions à acheter :")
+    cout_total = 0
+    profit_total = 0
+    for action in meilleur_ensemble:
+        print(f"Nom : {action[0]} - coût : {action[1]} - profit : {action[2]}")
+        cout_total += action[1]
+        profit_total += action[2]
+    print(f"Pour un total de {len(meilleur_ensemble)} actions, nous avons un coût "
+          f"total "
+          f"de {cout_total} € et un profit total de {round(profit_total, 2)} €")
+    end_time = time.time()
+    duree = end_time - start_time
+    return duree
