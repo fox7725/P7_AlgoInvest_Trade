@@ -73,3 +73,6 @@ def resultat():
     end_time = time.time()
     duree = end_time - start_time
     return duree
+
+if __name__ == "__main__":
+    print("Merci de commencer par lancer main.py")

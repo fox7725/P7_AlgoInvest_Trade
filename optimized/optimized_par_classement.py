@@ -3,6 +3,8 @@ import time
 
 
 def lecture_fichier(fichier):
+    """Extraction des données du fichier et classement de celles ci par
+    ordre croissant le la valeur de profit après deux ans"""
     with open(fichier, 'r') as f:
         reader = csv.DictReader(f)
         data = []
@@ -25,6 +27,8 @@ def lecture_fichier(fichier):
 
 
 def construire_new_dataset(data, budget_max_centimes):
+    """Construction du jeu d'actions sélectionnées et récupérations des
+    totaux"""
     total_price = 0
     total_profit = 0
     new_dataset = []
@@ -39,8 +43,31 @@ def construire_new_dataset(data, budget_max_centimes):
     retour = [new_dataset, total_price, total_profit]
     return retour
 
+
+def traitement(fichier, budget_max_centimes):
+    """Traitement du fichier et affichage des résultats"""
+    print(" ")
+    print(f"Valeurs sélectionnées pour le fichier '{fichier}' :")
+    start_time = time.time()
+    fichier_lu = lecture_fichier(fichier)
+    fichier_traite = construire_new_dataset(fichier_lu, budget_max_centimes)
+    liste_actions = fichier_traite[0]
+    cout_max = fichier_traite[1]
+    profit_max = fichier_traite[2]
+    for action in liste_actions:
+        print(f"Nom: {action['name']}, Coût: {action['price'] / 100}€, Valeur après 2 ans: "
+              f"{round(action['profit'] / 100, 2)}€")
+    print(f"totaux : achat {cout_max / 100} - profit "
+          f"{round(profit_max / 100, 2)}")
+    end_time = time.time()
+    print(f"Le fichier initial contenait {len(fichier_lu)} actions, nous avons sélectionné {len(liste_actions)} "
+          f"actions dans le fichier.")
+    return end_time - start_time
+
+
 def resultat():
     # Chemins des fichiers
+    fichier0 = "bruteforce/Actions.csv"
     fichier1 = 'optimized/dataset1_Python+P7.csv'
     fichier2 = 'optimized/dataset2_Python+P7.csv'
 
@@ -48,41 +75,16 @@ def resultat():
     budget_max = 500
     budget_max_centimes = budget_max * 100
 
-    print("Valeurs sélectionnées pour le fichier 1 :")
-    start_time = time.time()
-    fichier1_lu = lecture_fichier(fichier1)
-    fichier1_traite = construire_new_dataset(fichier1_lu, budget_max_centimes)
-    liste_actions = fichier1_traite[0]
-    cout_max = fichier1_traite[1]
-    profit_max = fichier1_traite[2]
-    for action in liste_actions:
-        print(f"Nom: {action['name']}, Coût: {action['price'] / 100}€, Valeur après 2 ans: "
-              f"{round(action['profit'] / 100, 2)}€")
-    print(f"totaux : achat {cout_max/100} - profit "
-            f"{round(profit_max/100, 2)}")
-    end_time = time.time()
-    print(f"Le fichier initial contenait {len(fichier1_lu)} actions, nous avons sélectionné {len(liste_actions)} "
-          f"actions dans le fichier")
-    print(f"Temps mis pour traiter le premier fichier : {end_time - start_time} secondes")
+    # traitement du premier fichier
+    fichier1_traite = traitement(fichier1, budget_max_centimes)
+    print(f"Temps mis pour traiter le premier fichier : {fichier1_traite} "
+          f"secondes")
     input("Tapez ENTER !")
 
-    print(" ")
-    print("Valeurs sélectionnées pour le fichier 2 :")
-    start_time = time.time()
-    fichier2_lu = lecture_fichier(fichier2)
-    fichier2_traite = construire_new_dataset(fichier2_lu, budget_max_centimes)
-    liste_actions = fichier2_traite[0]
-    cout_max = fichier2_traite[1]
-    profit_max = fichier2_traite[2]
-    for action in liste_actions:
-        print(f"Nom: {action['name']}, Coût: {action['price'] / 100}€, Valeur après 2 ans: "
-              f"{round(action['profit'] / 100, 2)}€")
-    print(f"totaux : achat {cout_max/100} - profit "
-            f"{round(profit_max/100, 2)}")
-    end_time = time.time()
-    print(f"Le fichier initial contenait {len(fichier2_lu)} actions, nous avons sélectionné {len(liste_actions)} "
-          f"actions dans le fichier")
-    print(f"Temps mis pour traiter le second fichier : {end_time - start_time} secondes")
+    # traitement du second fichier
+    fichier2_traite = traitement(fichier2, budget_max_centimes)
+    print(f"Temps mis pour traiter le second fichier : {fichier2_traite} "
+          f"secondes")
     input("Tapez ENTER !")
 
     print(" ")
@@ -104,3 +106,6 @@ def resultat():
           f" {len(liste_actions)} actions dans cet ensemble")
     duree = end_time - start_time
     return duree
+
+if __name__ == "__main__":
+    print("Merci de commencer par lancer main.py")
