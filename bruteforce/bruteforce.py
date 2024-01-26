@@ -2,8 +2,6 @@ import csv
 from itertools import combinations
 import time
 
-import optimized.optimized_par_classement
-
 
 def lire_actions_csv(filename):
     """Lire les données des actions depuis un fichier CSV."""
@@ -47,6 +45,7 @@ def brute_force(actions, budget_max):
 
 
 def resultat():
+    """Affichage des résultats"""
     start_time = time.time()
     actions = lire_actions_csv('bruteforce/Actions.csv')
     budget_max = 500
@@ -64,6 +63,7 @@ def resultat():
     end_time = time.time()
     duree = end_time - start_time
     return duree
+
 
 if __name__ == "__main__":
     print("Merci de commencer par lancer main.py")

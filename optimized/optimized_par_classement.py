@@ -67,7 +67,7 @@ def traitement(fichier, budget_max_centimes):
 
 def resultat():
     # Chemins des fichiers
-    fichier0 = "bruteforce/Actions.csv"
+    # fichier0 = "bruteforce/Actions.csv"
     fichier1 = 'optimized/dataset1_Python+P7.csv'
     fichier2 = 'optimized/dataset2_Python+P7.csv'
 
@@ -100,12 +100,13 @@ def resultat():
         print(f"Nom: {action['name']}, Coût: {action['price'] / 100}€, Valeur après 2 ans: "
               f"{round(action['profit'] / 100, 2)}€")
     print(f"totaux : achat {cout_max/100} - profit "
-            f"{round(profit_max/100, 2)}")
+          f"{round(profit_max/100, 2)}")
     end_time = time.time()
     print(f"Les deux fichiers ensemble contenaient {len(fichiers_ensembles)} actions, nous avons sélectionné"
           f" {len(liste_actions)} actions dans cet ensemble")
     duree = end_time - start_time
     return duree
+
 
 if __name__ == "__main__":
     print("Merci de commencer par lancer main.py")

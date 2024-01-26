@@ -1,9 +1,12 @@
 import sys
 
 import bruteforce.bruteforce
-import optimized.optimized_par_classement, optimized.optimized_sac_a_dos
+import optimized.optimized_par_classement
+import optimized.optimized_sac_a_dos
+
 
 def principal():
+    """Menu principal"""
     print("Bienvenue dans le programme de découverte des Algorithmes de "
           "AlgoInvest réalisé par Christophe RENARD")
     print("Nous vous recommandons de commencer par le choix 1 pour découvrir la "
@@ -47,6 +50,7 @@ def principal():
 
         elif choix == "Q" or choix == "q":
             sys.exit("Merci et à bientôt !")
+
 
 if __name__ == "__main__":
     principal()
