@@ -10,9 +10,9 @@ def principal():
     print("Bienvenue dans le programme de découverte des Algorithmes de "
           "AlgoInvest réalisé par Christophe RENARD")
     print("Nous vous recommandons de commencer par le choix 1 pour découvrir la "
-          "Bruteforce puis le choix 2 pour découvrir un algorithme opérant un "
-          "choix par classement des résultats et enfin le choix 3 pour utiliser "
-          "la méthode du sac à dos proposée par ChatGPT.")
+          "Bruteforce et le comparatif avec un algorithme optimisé puis le choix 2 pour découvrir un algorithme "
+          "opérant un choix par classement des résultats et enfin le choix 3 pour utiliser la méthode du sac à dos "
+          "proposée par ChatGPT.")
     choix = "0"
     while choix != "1" and choix != "2" and choix != "3" and choix != "Q" and choix != "q":
         print("")
@@ -27,6 +27,10 @@ def principal():
             print(f"Le temps de traitement de la bruteforce a été de {resultat} "
                   f"secondes")
             print("")
+            input("Pressez ENTER pour démarrer l'algorithme optimisé (par classement)")
+            resultat_20_actions = optimized.optimized_par_classement.resultat_20_actions()
+            print(f"Le temps de traitement de la bruteforce a été de {resultat_20_actions} "
+                  f"secondes")
             input("Pressez ENTER pour retourner au menu")
             choix = "0"
 

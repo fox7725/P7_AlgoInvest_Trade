@@ -32,7 +32,8 @@ def meilleur_investissement_sac_a_dos(actions, budget):
     for i in range(n, 0, -1):
         if w >= actions.iloc[i-1]['price'] and dp[i][w] != dp[i-1][w]:
             action = actions.iloc[i-1]
-            solution.append({'name': action['name'], 'cost': action['price'], 'value_after_2_years': action['price'] + action['profit']})
+            solution.append({'name': action['name'], 'cost': action[
+                'price'], 'value_after_2_years': action['profit']})
             w -= action['price']
 
     return solution
@@ -65,10 +66,12 @@ def resultat():
     # Affichage des résultats
     print("Actions sélectionnées :")
     for action in meilleur_ensemble:
-        print(f"Nom: {action['name']}, Coût: {action['cost']/100}€, Valeur après 2 ans: {action['value_after_2_years']/100}€")
+        print(f"Nom: {action['name']}, Coût: {action['cost']/100}€, Valeur "
+              f"après 2 ans: {round(action['value_after_2_years']/100, 2)}€")
 
     print(" ")
-    print(f"Total d'achat: {total_cost/100}€, Valeur totale après 2 ans: {total_value_after_2_years/100}€")
+    print(f"Total d'achat: {total_cost/100}€, Valeur totale après 2 ans: "
+          f"{round(total_value_after_2_years/100, 2)}€")
     print("Nombre d'actions sélectionnées : " + str(len(meilleur_ensemble)))
     end_time = time.time()
     duree = end_time - start_time
