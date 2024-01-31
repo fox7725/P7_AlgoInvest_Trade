@@ -22,6 +22,8 @@ def principal():
         print("Q Quitter")
         choix = input("Que voulez vous faire ?")
         if choix == "1":
+            print("")
+            print("Veuillez patienter ...")
             resultat = bruteforce.bruteforce.resultat()
             print("")
             print(f"Le temps de traitement de la bruteforce a été de {resultat} "
@@ -44,6 +46,8 @@ def principal():
             choix = "0"
 
         elif choix == "3":
+            print("")
+            print("Veuillez patienter ...")
             resultat = optimized.optimized_sac_a_dos.resultat()
             print("")
             print(f"Temps mis pour traiter les deux fichiers : {resultat} "

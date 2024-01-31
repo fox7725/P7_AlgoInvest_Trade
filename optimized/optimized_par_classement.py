@@ -79,7 +79,7 @@ def traitement(fichier, budget_max_centimes):
     cout_max = fichier_traite[1]
     profit_max = fichier_traite[2]
     for action in liste_actions:
-        print(f"Nom: {action['name']}, Coût: {action['price'] / 100}€, Valeur après 2 ans: "
+        print(f"Nom: {action['name']}, Coût: {action['price'] / 100}€, Profit après 2 ans: "
               f"{round(action['profit'] / 100, 2)}€")
     print(f"totaux : achat {cout_max / 100} - profit "
           f"{round(profit_max / 100, 2)}")
