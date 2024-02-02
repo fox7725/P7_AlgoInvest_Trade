@@ -47,35 +47,51 @@ def resultat():
     budget_max = 500
     budget_max_centimes = budget_max * 100
 
+    # Traiter le premier dataset
     start_time = time.time()
-
-    # Lire et nettoyer les données des deux fichiers
     actions1 = lire_et_nettoyer_csv(fichier1)
+    afficher_resultats_individuels(actions1, budget_max_centimes, "Dataset 1")
+    end_time = time.time()
+    print(f"Le fichier contenait {len(actions1)} actions et a été traité en {end_time - start_time} secondes")
+    print("")
+    input("Tapez ENTER pour continuer")
+    print("")
+    print("Veuillez patienter ...")
+
+    # Traiter le second dataset
+    start_time = time.time()
     actions2 = lire_et_nettoyer_csv(fichier2)
+    afficher_resultats_individuels(actions2, budget_max_centimes, "Dataset 2")
+    end_time = time.time()
+    print(f"Le fichier contenait {len(actions2)} actions et a été traité en {end_time - start_time} secondes")
+    print("")
+    input("Tapez ENTER pour continuer")
+    print("")
+    print("Veuillez patienter ...")
 
-    # Combiner les données des deux fichiers
+    # Traiter la combinaison des deux datasets
+    start_time = time.time()
     actions_combinees = pd.concat([actions1, actions2], ignore_index=True)
+    afficher_resultats_individuels(actions_combinees, budget_max_centimes, "Combinaison des Datasets 1 et 2")
+    end_time = time.time()
+    print(f"L'ensemble des deux fichiers contenaient {len(actions1)} actions")
 
-    # Trouver le meilleur ensemble d'actions
-    meilleur_ensemble = meilleur_investissement_sac_a_dos(actions_combinees, budget_max_centimes)
+    return end_time - start_time
 
-    # Calculer et afficher les totaux
+
+def afficher_resultats_individuels(actions, budget_max_centimes, description):
+    meilleur_ensemble = meilleur_investissement_sac_a_dos(actions, budget_max_centimes)
     total_cost = sum(action['cost'] for action in meilleur_ensemble)
     total_value_after_2_years = sum(action['value_after_2_years'] for action in meilleur_ensemble)
 
-    # Affichage des résultats
-    print("Actions sélectionnées :")
+    print("")
+    print(f"Résultats pour {description}:")
     for action in meilleur_ensemble:
-        print(f"Nom: {action['name']}, Coût: {action['cost']/100}€, Valeur "
-              f"après 2 ans: {round(action['value_after_2_years']/100, 2)}€")
+        print(
+            f"Nom: {action['name']}, Coût: {action['cost'] / 100:.2f}€, Valeur après 2 ans: {action['value_after_2_years'] / 100:.2f}€")
+    print(f"Total d'achat: {total_cost / 100:.2f}€, Valeur totale après 2 ans: {total_value_after_2_years / 100:.2f}€")
+    print(f"Nombre d'actions sélectionnées: {len(meilleur_ensemble)}\n")
 
-    print(" ")
-    print(f"Total d'achat: {total_cost/100}€, Valeur totale après 2 ans: "
-          f"{round(total_value_after_2_years/100, 2)}€")
-    print("Nombre d'actions sélectionnées : " + str(len(meilleur_ensemble)))
-    end_time = time.time()
-    duree = end_time - start_time
-    return duree
 
 if __name__ == "__main__":
     print("Merci de commencer par lancer main.py")

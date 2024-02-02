@@ -11,14 +11,14 @@ def principal():
           "AlgoInvest réalisé par Christophe RENARD")
     print("Nous vous recommandons de commencer par le choix 1 pour découvrir la "
           "Bruteforce et le comparatif avec un algorithme optimisé puis le choix 2 pour découvrir un algorithme "
-          "opérant un choix par classement des résultats et enfin le choix 3 pour utiliser la méthode du sac à dos "
-          "proposée par ChatGPT.")
+          "opérant un choix par classement des résultats et enfin le choix 3 pour utiliser la méthode dynamique du "
+          "sac à dos proposée par ChatGPT.")
     choix = "0"
     while choix != "1" and choix != "2" and choix != "3" and choix != "Q" and choix != "q":
         print("")
         print("1 Bruteforce")
         print("2 Algorithme de classement et de tri")
-        print("3 Algorithme du sac à dos proposé par ChatGPT")
+        print("3 Algorithme dynamique du sac à dos proposé par ChatGPT")
         print("Q Quitter")
         choix = input("Que voulez vous faire ?")
         if choix == "1":
@@ -50,8 +50,7 @@ def principal():
             print("Veuillez patienter ...")
             resultat = optimized.optimized_sac_a_dos.resultat()
             print("")
-            print(f"Temps mis pour traiter les deux fichiers : {resultat} "
-                  f"secondes")
+            print(f"qui ont été traitées en {resultat} secondes")
             print("")
             input("Pressez ENTER pour retourner au menu")
             choix = "0"
