@@ -132,6 +132,7 @@ def resultat():
 
 
 def resultat_20_actions():
+    """Affichage des résultats"""
     # On indique le chemin du fichier
     fichier = "bruteforce/Actions.csv"
 

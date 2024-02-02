@@ -38,6 +38,7 @@ def meilleur_investissement_sac_a_dos(actions, budget):
 
     return solution
 
+
 def resultat():
     # Chemins des fichiers
     fichier1 = 'optimized/dataset1_Python+P7.csv'
@@ -88,7 +89,8 @@ def afficher_resultats_individuels(actions, budget_max_centimes, description):
     print(f"Résultats pour {description}:")
     for action in meilleur_ensemble:
         print(
-            f"Nom: {action['name']}, Coût: {action['cost'] / 100:.2f}€, Valeur après 2 ans: {action['value_after_2_years'] / 100:.2f}€")
+            f"Nom: {action['name']}, Coût: {action['cost'] / 100:.2f}€, Valeur après 2 ans:"
+            f" {action['value_after_2_years'] / 100:.2f}€")
     print(f"Total d'achat: {total_cost / 100:.2f}€, Valeur totale après 2 ans: {total_value_after_2_years / 100:.2f}€")
     print(f"Nombre d'actions sélectionnées: {len(meilleur_ensemble)}\n")
 
